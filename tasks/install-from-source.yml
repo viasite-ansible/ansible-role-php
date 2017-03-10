@@ -97,12 +97,14 @@
     ./buildconf --force
     chdir={{ php_source_clone_dir }}
   when: php_installed|failed
+  tags: skip_ansible_lint
 
 - name: Run configure script.
   shell: >
     {{ php_source_configure_command }}
     chdir={{ php_source_clone_dir }}
   when: php_installed|failed
+  tags: skip_ansible_lint
 
 - name: Make and install PHP.
   shell: >
@@ -112,6 +114,7 @@
     - "{{ php_source_make_command }}"
     - make install
   when: php_installed|failed
+  tags: skip_ansible_lint
 
 - name: Ensure php executable is symlinked into a standard path.
   file:
