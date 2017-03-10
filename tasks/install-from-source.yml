@@ -44,7 +44,7 @@
       - libcurl4-openssl-dev
       - libbz2-dev
       - libjpeg-dev
-      - libpng-dev
+      - libpng12-dev
       - libxpm-dev
       - libfreetype6-dev
       - libgmp3-dev
@@ -99,12 +99,14 @@
     ./buildconf --force
     chdir={{ php_source_clone_dir }}
   when: php_installed.rc != 0
+  tags: skip_ansible_lint
 
 - name: Run configure script.
   command: >
     {{ php_source_configure_command }}
     chdir={{ php_source_clone_dir }}
   when: php_installed.rc != 0
+  tags: skip_ansible_lint
 
 - name: Make and install PHP.
   command: >
@@ -114,6 +116,7 @@
     - "{{ php_source_make_command }}"
     - make install
   when: php_installed.rc != 0
+  tags: skip_ansible_lint
 
 - name: Ensure php executable is symlinked into a standard path.
   file:
