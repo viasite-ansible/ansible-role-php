@@ -1,18 +1,13 @@
 ---
-dependency:
-  name: galaxy
-
 driver:
   name: docker
 docker:
   containers:
-    - name: ansible-role-php
+    - name: ansible-role-php-1604
       image: ubuntu
-      image_version: latest
+      image_version: 16.04
       volume_mounts:
         - ${MOLECULE_APTPROXY_PATH}:/etc/apt/apt.conf.d/00aptproxy
-      ansible_groups:
-        - group1
 
 ansible:
   playbook: tests/playbook.yml
@@ -45,3 +40,4 @@ ansible:
       php_session_gc_divisor: 1000
       php_session_gc_maxlifetime: 1440
       php_date_timezone: "Asia/Yekaterinburg"
+
