@@ -3,7 +3,7 @@
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Define php_packages.
+- name: "Define php_packages for PHP {{ php_version }}."
   set_fact:
     php_packages: "{{ __php_packages | list }}"
   when: php_packages is not defined
